@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+
+<VBox alignment="CENTER" spacing="20" prefHeight="900.0" prefWidth="1200" style="-fx-background-color: #333333; -fx-text-fill: white;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Controllers.RegisterSceneController">
+    <Label text="Rejestracja" textFill="WHITE"/>
+    <!-- Powtórz poniższy blok dla każdego pola tekstowego -->
+    <VBox spacing="5" alignment="CENTER">
+        <Label text="Login" textFill="WHITE"/>
+        <TextField fx:id="usernameField" maxWidth="200" prefHeight="50"/>
+        <Label text="Password" textFill="WHITE"/>
+        <TextField fx:id="password" maxWidth="200" prefHeight="50"/>
+        <Label text="Confirm Password" textFill="WHITE"/>
+        <TextField fx:id="passwordConfirm" maxWidth="200" prefHeight="50"/>
+        <Label text="E-mail" textFill="WHITE"/>
+        <TextField fx:id="email" maxWidth="200" prefHeight="50"/>
+        <Label text="Confirm E-mail" textFill="WHITE"/>
+        <TextField fx:id="emailConfirm" maxWidth="200" prefHeight="50"/>
+    </VBox>
+    <Button fx:id="registerButton" text="Zarejestruj" style="-fx-base: #3b3b3b; -fx-text-fill: white;" prefWidth="200" prefHeight="50"/>
+    <Label fx:id="infoLabel" textFill="WHITE"/>
+    <Button fx:id="backToMain" text="Powrot" style="-fx-base: #3b3b3b; -fx-text-fill: white;" prefWidth="200" prefHeight="50"/>
+</VBox>
