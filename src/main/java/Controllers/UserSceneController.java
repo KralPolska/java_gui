@@ -55,19 +55,23 @@ public class UserSceneController {
     @FXML private TextField pane_editUsername_newUsername;
     @FXML private Button pane_editUsername_confirm;
     @FXML private Button pane_editUsername_discard;
+    @FXML private Label pane_editUsername_warning;
 
     @FXML private VBox pane_editPassword;
     @FXML private TextField pane_editPassword_newPassword;
     @FXML private TextField pane_editPassword_newPasswordConfirm;
     @FXML private Button pane_editPassword_confirm;
     @FXML private Button pane_editPassword_discard;
+    @FXML private Label pane_editPassword_warning;
 
     @FXML private VBox pane_editEmail;
     @FXML private TextField pane_editEmail_newEmail;
     @FXML private TextField pane_editEmail_newEmailConfirm;
     @FXML private Button pane_editEmail_confirm;
     @FXML private Button pane_editEmail_discard;
-    private final String username = "admin";
+    @FXML private Label pane_editEmail_warning;
+    private String username = "admin";
+    private final String email = "test@org.com";
 
     @FXML
     private void initialize() {
@@ -85,6 +89,14 @@ public class UserSceneController {
         howToGetButton.setOnAction(event -> handleHowToGetButtonAction());
         infoButton.setOnAction(event -> handleInfoButtonAction());
         logoutButton.setOnAction(event -> handleLogoutButtonAction());
+        editUsername.setOnAction(event -> handleChangeUsername());
+        editPassword.setOnAction(event -> handleChangePassword());
+        editEmail.setOnAction(event -> handleChangeEmail());
+
+        usernameLabel.setText(username);
+        info_username.setText(info_username.getText()+"\n"+usernameLabel.getText());
+
+        info_email.setText(info_email.getText()+"\n"+email);
     }
 
     private void handleBuyButtonAction() {
@@ -146,6 +158,103 @@ public class UserSceneController {
         pane_editPassword.setVisible(false);
         pane_editEmail.setVisible(false);
         pane_empty.setVisible(true);
+    }
+
+    private void handleChangeUsername() {
+        try{
+            if(!pane_editUsername.isVisible()) {
+                pane_editUsername.setVisible(true);
+                pane_editPassword.setVisible(false);
+                pane_editEmail.setVisible(false);
+                pane_editUsername_confirm.setOnAction(actionEvent -> {
+                    String test = pane_editUsername_newUsername.getText();
+                    if(!test.isEmpty())
+                    {
+                        //Dołożyć sprawdzenie czy nazwa jest zajęta
+                        username = pane_editUsername_newUsername.getText();
+                        pane_editUsername_newUsername.setText("");
+                        pane_editUsername.setVisible(false);
+                        usernameLabel.setText(username);
+                    }
+                });
+                pane_editUsername_discard.setOnAction(actionEvent -> {
+                    pane_editUsername_newUsername.setText("");
+                    pane_editUsername.setVisible(false);
+                });
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void handleChangePassword()
+    {
+        try{
+            if(!pane_editPassword.isVisible()) {
+                pane_editPassword.setVisible(true);
+                pane_editUsername.setVisible(false);
+                pane_editEmail.setVisible(false);
+                pane_editPassword_confirm.setOnAction(actionEvent -> {
+                    String test = pane_editPassword_newPassword.getText();
+                    if(!test.isEmpty())
+                    {
+                        if(test.equals(pane_editPassword_newPasswordConfirm.getText()))
+                        {
+                            //Wysyłanie zapytania do serwera o update hasła
+                        }
+                        else
+                        {
+                            pane_editPassword_warning.setText("Hasła nie są jednakowe!");
+                        }
+                    }
+                });
+                pane_editPassword_discard.setOnAction(actionEvent -> {
+                    pane_editPassword.setVisible(false);
+                    pane_editPassword_warning.setText("");
+                });
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void handleChangeEmail()
+    {
+        try{
+            if(!pane_editEmail.isVisible())
+            {
+                pane_editEmail.setVisible(true);
+                pane_editUsername.setVisible(false);
+                pane_editPassword.setVisible(false);
+                pane_editEmail_confirm.setOnAction(event -> {
+
+                String test = pane_editEmail_newEmail.getText();
+                if(!test.isEmpty())
+                {
+                    if(test.equals(pane_editEmail_newEmailConfirm.getText()))
+                    {
+                        //Wysyłanie zapytania do serwera o update emaila
+                    }
+                    else
+                    {
+                        pane_editEmail_warning.setText("Emaile nie są jednakowe!");
+                    }
+                    pane_editEmail_warning.setText("");
+                    pane_editEmail_newEmail.setText("");
+                    pane_editEmail_newEmailConfirm.setText("");
+                }
+                });
+
+                pane_editEmail_discard.setOnAction(event ->{
+                    pane_editEmail.setVisible(false);
+                    pane_editEmail_warning.setText("");
+                    pane_editEmail_newEmail.setText("");
+                    pane_editEmail_newEmailConfirm.setText("");
+                });
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void handleLogoutButtonAction() {

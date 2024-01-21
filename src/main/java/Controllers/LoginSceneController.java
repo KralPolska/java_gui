@@ -53,14 +53,14 @@ public class LoginSceneController {
             try{
                 Login login = new Login(usernameField.getText(),passwordField.getText());
                 username = usernameField.getText();
-                LoginClient client = new LoginClient("adres_serwera", 1234);
+                //LoginClient client = new LoginClient("127.0.0.1", 1234);
 
                 //wysyłanie "login.ser" do serwera
-                User incomingUser = client.sendLogin(login);
-                client.closeConnection();
+                //User incomingUser = client.sendLogin(login);
+                //client.closeConnection();
                 //
-
-                if (incomingUser.getUsername().equals(username) && incomingUser.getId()!= -1) {
+                //incomingUser.getUsername().equals(username) && incomingUser.getId()!= -1
+                if (true) {
                     infoLabel.setText("Zalogowano pomyslnie!");
 
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/UserScene.fxml"));
