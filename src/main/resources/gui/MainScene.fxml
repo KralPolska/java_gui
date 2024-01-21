@@ -6,5 +6,5 @@
 <VBox prefHeight="900.0" prefWidth="1200" alignment="CENTER" spacing="60" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Controllers.MainSceneController" style="-fx-background-color: #333333;">
         <Button fx:id="loginButton" text="ZALOGUJ" style="-fx-base: #3b3b3b; -fx-text-fill: white;" prefWidth="200.0" prefHeight="50.0"/>
         <Button fx:id="registerButton" text="ZAREJESTRUJ" style="-fx-base: #3b3b3b; -fx-text-fill: white;" prefWidth="200.0" prefHeight="50.0"/>
-        <Button fx:id="exitButton" text="WYJDŹ" style="-fx-base: #3b3b3b; -fx-text-fill: #8f0e0e;" prefWidth="200.0" prefHeight="50.0"/>
+        <Button fx:id="exitButton" text="WYJDŹ" style="-fx-base: #3b3b3b; -fx-text-fill: red;" prefWidth="200.0" prefHeight="50.0"/>
 </VBox>

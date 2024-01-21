@@ -3,23 +3,25 @@ package ObjectClasses;
 import java.io.Serializable;
 
 public class User implements Serializable {
-    private String id;
+    private Integer id;
     private String username;
+    private Integer polecenie;
 
-    public User(String id, String username)
-    {
+    public User(Integer id, String username, Integer polecenie) {
         this.id = id;
         this.username = username;
+        this.polecenie = polecenie;
     }
 
-    public String getId()
-    {
+    public Integer getId() {
         return id;
     }
 
-    public String getUsername()
-    {
+    public String getUsername() {
         return username;
     }
 
+    public Integer getPolecenie() {
+        return polecenie;
+    }
 }

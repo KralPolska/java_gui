@@ -1,5 +1,9 @@
 package Controllers;
 
+import ObjectClasses.Login;
+import ObjectClasses.Serializer;
+import ObjectClasses.User;
+import ServerConnection.LoginClient;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,6 +13,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.geometry.*;
 
@@ -17,12 +22,15 @@ public class LoginSceneController {
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private Label infoLabel;
+    @FXML private Text test;
     @FXML private Button loginButton;
     @FXML private Button backToMain;
     @FXML private CheckBox rememberMeCheckbox;
 
     String username;
     String password;
+
+    Integer id;
 
     @FXML
     private void initialize() {
@@ -43,10 +51,16 @@ public class LoginSceneController {
         });
         loginButton.setOnAction(event -> {
             try{
-                username = usernameField.getText(); //15 znaków sie miesic
-                password = passwordField.getText(); //25 znaków
+                Login login = new Login(usernameField.getText(),passwordField.getText());
+                username = usernameField.getText();
+                LoginClient client = new LoginClient("adres_serwera", 1234);
 
-                if (username.equals("admin") && password.equals("admin")) {
+                //wysyłanie "login.ser" do serwera
+                User incomingUser = client.sendLogin(login);
+                client.closeConnection();
+                //
+
+                if (incomingUser.getUsername().equals(username) && incomingUser.getId()!= -1) {
                     infoLabel.setText("Zalogowano pomyslnie!");
 
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/UserScene.fxml"));

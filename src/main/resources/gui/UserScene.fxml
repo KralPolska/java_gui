@@ -7,6 +7,13 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Pos?>
 
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.Region?>
 <BorderPane prefHeight="900" prefWidth="1200" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Controllers.UserSceneController" style="-fx-background-color: #333;">
     <top>
         <VBox alignment="CENTER_LEFT" spacing="10" style="-fx-background-color: #666666;-fx-padding: 15 15 15 15">
@@ -19,7 +26,6 @@
             <Label text="TWOJE BILETY" style="-fx-text-fill: white; -fx-font-weight: bold;"/>
             <Button fx:id="buyButton" text="Kup" style="-fx-base: #666; -fx-text-fill: white;" prefWidth="200" prefHeight="40"/>
             <Button fx:id="historyButton" text="Historia" style="-fx-base: #666; -fx-text-fill: white;" prefWidth="200" prefHeight="40"/>
-            <Button fx:id="extendButton" text="Przedluz" style="-fx-base: #666; -fx-text-fill: white;" prefWidth="200" prefHeight="40"/>
 
             <Label text="ROZKŁAD" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 20 0 0 0"/>
             <Button fx:id="linesButton" text="Linie" style="-fx-base: #666; -fx-text-fill: white;" prefWidth="200" prefHeight="40"/>
@@ -28,8 +34,67 @@
 
             <Label text="KONTO" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 20 0 0 0"/>
             <Button fx:id="infoButton" text="Informacje" style="-fx-base: #666; -fx-text-fill: white;" prefWidth="200" prefHeight="40"/>
-            <Button fx:id="editButton" text="Edycja" style="-fx-base: #666; -fx-text-fill: white;" prefWidth="200" prefHeight="40"/>
-            <Button fx:id="logoutButton" text="Wyloguj" style="-fx-text-fill: red; -fx-base: #666;" prefWidth="200" prefHeight="40"/>
+            <Button fx:id="logoutButton" text="Wyloguj" style="-fx-text-fill: red; -fx-base: #666;" prefWidth="200" prefHeight="40" VBox.vgrow="ALWAYS"/>
         </VBox>
+
     </left>
+    <center>
+        <StackPane>
+            <VBox fx:id="vbox_kup_bilet" alignment="CENTER" spacing="10" style="-fx-background-color: #333; -fx-padding: 20 20 20 20" minHeight="529" minWidth="720">
+                <TextField fx:id="creditcardnumber" prefHeight="50.0" maxWidth="200.0" promptText="xxxx-xxxx-xxxx-xxxx"/>
+                <Button fx:id="buyConfirm" text="Potwierdź" style="-fx-base: #666; -fx-text-fill: white;" prefWidth="200" prefHeight="40"/>
+            </VBox>
+            <VBox fx:id="vbox_historia" alignment="TOP_CENTER" spacing="10" style="-fx-background-color: #333; -fx-padding: 20 20 20 20" minHeight="529" minWidth="720">
+                <TableView fx:id="TableBilety" layoutX="240.0" layoutY="50.0" prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: #888">
+                    <columns>
+                        <TableColumn fx:id="Id" prefWidth="125.0" text="ID" />
+                        <TableColumn fx:id="Id_rozkladu" prefWidth="125.0" text="Rozklad" />
+                        <TableColumn fx:id="Data_waznosci" prefWidth="125.0" text="Data ważności" />
+                        <TableColumn fx:id="Cena" prefWidth="125.0" text="Cena" />
+                    </columns>
+                </TableView>
+            </VBox>
+            <VBox fx:id="vbox_linie">
+
+            </VBox>
+            <VBox fx:id="vbox_rozklad">
+
+            </VBox>
+            <VBox fx:id="vbox_jak_dojade">
+
+            </VBox>
+            <VBox fx:id="vbox_info" alignment="TOP_LEFT" spacing="10" style="-fx-background-color: #333; -fx-padding: 20 20 20 20" minHeight="529" minWidth="720">
+                <Pane>
+                    <Label fx:id="info_username" text="Nazwa użytkownia: "/>
+                    <Button fx:id="editUsername" text="Zmień nazwę" style="-fx-base: #666; -fx-text-fill: white;" prefWidth="200" prefHeight="40" layoutY="50"/>
+                    <Label fx:id="info_password" text="Hasło: "/>
+                    <Button fx:id="editPassword" text="Zmień hasło" style="-fx-base: #666; -fx-text-fill: white;" prefWidth="200" prefHeight="40" layoutY="100"/>
+                    <Label fx:id="info_email" text="Email: "/>
+                    <Button fx:id="editEmail" text="Zmień email" style="-fx-base: #666; -fx-text-fill: white;" prefWidth="200" prefHeight="40" layoutY="150"/>
+                </Pane>
+                <StackPane>
+                    <VBox fx:id="pane_empty">
+
+                    </VBox>
+                    <VBox fx:id="pane_editUsername">
+                        <TextField fx:id="pane_editUsername_newUsername" maxWidth="200" prefHeight="50" VBox.vgrow="ALWAYS" style="-fx-background-color: rgba(136,136,136,0.3)"/>
+                        <Button fx:id="pane_editUsername_confirm" text="Potwierdź" style="-fx-background-color: lime; -fx-text-fill: white;" prefHeight="30" prefWidth="50"/>
+                        <Button fx:id="pane_editUsername_discard" text="Odzruć" style="-fx-background-color: #ff214e; -fx-text-fill: white;" prefHeight="30" prefWidth="50"/>
+                    </VBox>
+                    <VBox fx:id="pane_editPassword">
+                        <TextField fx:id="pane_editPassword_newPassword" maxWidth="200" prefHeight="50" VBox.vgrow="ALWAYS" style="-fx-background-color: rgba(136,136,136,0.3)"/>
+                        <TextField fx:id="pane_editPassword_newPasswordConfirm" maxWidth="200" prefHeight="50" VBox.vgrow="ALWAYS" style="-fx-background-color: rgba(136,136,136,0.3)"/>
+                        <Button fx:id="pane_editPassword_confirm" text="Potwierdź" style="-fx-background-color: lime; -fx-text-fill: white;" prefHeight="30" prefWidth="50"/>
+                        <Button fx:id="pane_editPassword_discard" text="Odzruć" style="-fx-background-color: #ff214e; -fx-text-fill: white;" prefHeight="30" prefWidth="50"/>
+                    </VBox>
+                    <VBox fx:id="pane_editEmail">
+                        <TextField fx:id="pane_editEmail_newEmail" maxWidth="200" prefHeight="50" VBox.vgrow="ALWAYS" style="-fx-background-color: rgba(136,136,136,0.3)"/>
+                        <TextField fx:id="pane_editEmail_newEmailConfirm" maxWidth="200" prefHeight="50" VBox.vgrow="ALWAYS" style="-fx-background-color: rgba(136,136,136,0.3)"/>
+                        <Button fx:id="pane_editEmail_confirm" text="Potwierdź" style="-fx-background-color: lime; -fx-text-fill: white;" prefHeight="30" prefWidth="50"/>
+                        <Button fx:id="pane_editEmail_discard" text="Odzruć" style="-fx-background-color: #ff214e; -fx-text-fill: white;" prefHeight="30" prefWidth="50"/>
+                    </VBox>
+                </StackPane>
+            </VBox>
+        </StackPane>
+    </center>
 </BorderPane>

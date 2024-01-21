@@ -6,8 +6,6 @@
 
 
 <VBox alignment="CENTER" spacing="20" prefHeight="900.0" prefWidth="1200" style="-fx-background-color: #333333; -fx-text-fill: white;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Controllers.RegisterSceneController">
-    <Label text="Rejestracja" textFill="WHITE"/>
-    <!-- Powtórz poniższy blok dla każdego pola tekstowego -->
     <VBox spacing="5" alignment="CENTER">
         <Label text="Login" textFill="WHITE"/>
         <TextField fx:id="usernameField" maxWidth="200" prefHeight="50"/>
@@ -21,6 +19,6 @@
         <TextField fx:id="emailConfirm" maxWidth="200" prefHeight="50"/>
     </VBox>
     <Button fx:id="registerButton" text="Zarejestruj" style="-fx-base: #3b3b3b; -fx-text-fill: white;" prefWidth="200" prefHeight="50"/>
-    <Label fx:id="infoLabel" textFill="WHITE"/>
+    <Label fx:id="infoLabel" textFill="red"/>
     <Button fx:id="backToMain" text="Powrot" style="-fx-base: #3b3b3b; -fx-text-fill: white;" prefWidth="200" prefHeight="50"/>
 </VBox>

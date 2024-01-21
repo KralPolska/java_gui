@@ -1,5 +1,7 @@
 package Controllers;
 
+import ObjectClasses.Login;
+import ObjectClasses.Register;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -56,17 +58,33 @@ public class RegisterSceneController {
         });
         registerButton.setOnAction(event -> {
             try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/MainScene.fxml"));
-                Parent root = loader.load();
+                Register register = new Register(usernameField.getText(), passwordField.getText(), confirmPasswordField.getText(), mailField.getText(), confirmMailField.getText());
+                String test = "nie";
+                //RegisterClient client = new RegisterClient("adres_serwera", 1234);
 
-                Scene scene = new Scene(root);
 
-                Stage stage = (Stage) backToMain.getScene().getWindow();
+                //User incomingUser = client.sendLogin(login);
+                //client.closeConnection();
+                //
+                //incomingUser.getUsername().equals(username) && incomingUser.getId()!= -1
+                if (test.equals("tak")) {
+                    infoLabel.setText("Zalogowano pomyslnie!");
 
-                stage.setScene(scene);
-            } catch (Exception e)
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/MainScene.fxml"));
+                    Parent root = loader.load();
+
+                    Scene scene = new Scene(root);
+
+                    Stage stage = (Stage) registerButton.getScene().getWindow();
+
+                    stage.setScene(scene);
+                } else {
+                    infoLabel.setText("Błędne dane logowania!");
+
+                }
+            } catch (Exception ee)
             {
-                throw new RuntimeException(e);
+                throw new RuntimeException(ee);
             }
         });
     }

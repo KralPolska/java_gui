@@ -13,12 +13,17 @@ public class Serializer {
         }
     }
 
-    public static <T> T deserializeObject(String filename) {
+    public static <T> T deserializeObject(String filename, Class<T> clazz) {
         try (FileInputStream fileIn = new FileInputStream(filename);
              ObjectInputStream objectIn = new ObjectInputStream(fileIn)) {
-            T object = (T) objectIn.readObject();
-            System.out.println("Obiekt zdeserializowany z pliku: " + filename);
-            return object;
+            Object obj = objectIn.readObject();
+            if (clazz.isInstance(obj)) {
+                System.out.println("Obiekt zdeserializowany z pliku: " + filename);
+                return clazz.cast(obj);
+            } else {
+                System.out.println("Nieprawidłowy typ obiektu.");
+                return null;
+            }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             return null;

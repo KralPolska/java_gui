@@ -1,22 +1,29 @@
 package Controllers;
 
-import ObjectClasses.BiletyMiesieczne;
+import ObjectClasses.Bilety;
 import ObjectClasses.Serializer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
 
 import java.time.LocalDateTime;
 
 public class UserSceneController {
 
+    @FXML private TableView<Bilety> TableBilety;
+    @FXML private TableColumn<Bilety,Integer> bilet_ID;
+    @FXML private TableColumn<Bilety,Integer> bilet_ID_Rozkladu;
+    @FXML private TableColumn<Bilety,LocalDateTime> bilet_Data_waznosci;
+    @FXML private TableColumn<Bilety,Double> bilet_Cena;
+
     @FXML private Button buyButton;
     @FXML private Button historyButton;
-    @FXML private Button extendButton;
+
     @FXML private Button linesButton;
     @FXML private Button stopsButton;
     @FXML private Button howToGetButton;
@@ -24,62 +31,121 @@ public class UserSceneController {
     @FXML private Button editButton;
     @FXML private Button logoutButton;
     @FXML private Label usernameLabel;
+
+    @FXML private VBox vbox_kup_bilet;
+    @FXML private Button buyConfirm;
+    @FXML private TextField creditcardnumber;
+
+    @FXML private VBox vbox_historia;
+
+    @FXML private VBox vbox_linie;
+    @FXML private VBox vbox_rozklad;
+    @FXML private VBox vbox_jak_dojade;
+
+    @FXML private VBox vbox_info;
+    @FXML private Pane pane_empty;
+    @FXML private Label info_username;
+    @FXML private Label info_password;
+    @FXML private Label info_email;
+    @FXML private Button editUsername;
+    @FXML private Button editPassword;
+    @FXML private Button editEmail;
+
+    @FXML private VBox pane_editUsername;
+    @FXML private TextField pane_editUsername_newUsername;
+    @FXML private Button pane_editUsername_confirm;
+    @FXML private Button pane_editUsername_discard;
+
+    @FXML private VBox pane_editPassword;
+    @FXML private TextField pane_editPassword_newPassword;
+    @FXML private TextField pane_editPassword_newPasswordConfirm;
+    @FXML private Button pane_editPassword_confirm;
+    @FXML private Button pane_editPassword_discard;
+
+    @FXML private VBox pane_editEmail;
+    @FXML private TextField pane_editEmail_newEmail;
+    @FXML private TextField pane_editEmail_newEmailConfirm;
+    @FXML private Button pane_editEmail_confirm;
+    @FXML private Button pane_editEmail_discard;
     private final String username = "admin";
 
     @FXML
     private void initialize() {
-        usernameLabel.setText(username);
+        vbox_historia.setVisible(false);
+        vbox_kup_bilet.setVisible(false);
+        vbox_linie.setVisible(false);
+        vbox_rozklad.setVisible(false);
+        vbox_jak_dojade.setVisible(false);
+        vbox_info.setVisible(false);
 
         buyButton.setOnAction(event -> handleBuyButtonAction());
         historyButton.setOnAction(event -> handleHistoryButtonAction());
-        extendButton.setOnAction(event -> handleExtendButtonAction());
         linesButton.setOnAction(event -> handleLinesButtonAction());
         stopsButton.setOnAction(event -> handleStopsButtonAction());
         howToGetButton.setOnAction(event -> handleHowToGetButtonAction());
         infoButton.setOnAction(event -> handleInfoButtonAction());
-        editButton.setOnAction(event -> handleEditButtonAction());
         logoutButton.setOnAction(event -> handleLogoutButtonAction());
     }
 
     private void handleBuyButtonAction() {
-        BiletyMiesieczne biletyMiesieczne = new BiletyMiesieczne(1,"test", LocalDateTime.now(), LocalDateTime.now().plusMonths(1));
+        vbox_kup_bilet.setVisible(true);
+        vbox_historia.setVisible(false);
+        vbox_linie.setVisible(false);
+        vbox_rozklad.setVisible(false);
+        vbox_jak_dojade.setVisible(false);
+        vbox_info.setVisible(false);
 
-        Serializer serializer;
-        Serializer.serializeObject(biletyMiesieczne,"obiekt.ser");
-
-
-        BiletyMiesieczne nowy = new BiletyMiesieczne();
-        nowy = Serializer.deserializeObject("obiekt.ser");
-        assert nowy != null;
-        System.out.println(nowy.getData_start()+" "+nowy.getData_koniec());
     }
 
     private void handleHistoryButtonAction() {
-        // Logika dla przycisku "Historia"
-    }
-
-    private void handleExtendButtonAction() {
-        // Logika dla przycisku "Przedluz"
+        vbox_kup_bilet.setVisible(false);
+        vbox_historia.setVisible(true);
+        vbox_linie.setVisible(false);
+        vbox_rozklad.setVisible(false);
+        vbox_jak_dojade.setVisible(false);
+        vbox_info.setVisible(false);
     }
 
     private void handleLinesButtonAction() {
-        // Logika dla przycisku "Linie"
+        vbox_kup_bilet.setVisible(false);
+        vbox_historia.setVisible(false);
+        vbox_linie.setVisible(true);
+        vbox_rozklad.setVisible(false);
+        vbox_jak_dojade.setVisible(false);
+        vbox_info.setVisible(false);
+
     }
 
     private void handleStopsButtonAction() {
-        // Logika dla przycisku "Przystanki"
+        vbox_kup_bilet.setVisible(false);
+        vbox_historia.setVisible(false);
+        vbox_linie.setVisible(false);
+        vbox_rozklad.setVisible(true);
+        vbox_jak_dojade.setVisible(false);
+        vbox_info.setVisible(false);
     }
 
     private void handleHowToGetButtonAction() {
-        // Logika dla przycisku "Jak dojade"
+        vbox_kup_bilet.setVisible(false);
+        vbox_historia.setVisible(false);
+        vbox_linie.setVisible(false);
+        vbox_rozklad.setVisible(false);
+        vbox_jak_dojade.setVisible(true);
+        vbox_info.setVisible(false);
     }
 
     private void handleInfoButtonAction() {
-        // Logika dla przycisku "Informacje"
-    }
+        vbox_kup_bilet.setVisible(false);
+        vbox_historia.setVisible(false);
+        vbox_linie.setVisible(false);
+        vbox_rozklad.setVisible(false);
+        vbox_jak_dojade.setVisible(false);
+        vbox_info.setVisible(true);
 
-    private void handleEditButtonAction() {
-        // Logika dla przycisku "Edycja"
+        pane_editUsername.setVisible(false);
+        pane_editPassword.setVisible(false);
+        pane_editEmail.setVisible(false);
+        pane_empty.setVisible(true);
     }
 
     private void handleLogoutButtonAction() {
